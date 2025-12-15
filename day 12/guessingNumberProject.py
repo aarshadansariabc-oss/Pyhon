@@ -16,6 +16,14 @@ def set_dificulty():
         return 10
     else:
         return 5
+    
+print("""
+   ┌───────────────────────────────┐
+   │     GUESS THE NUMBER GAME     │
+   └───────────────────────────────┘
+            🔢 1  TO  100 🔢
+"""
+)
 def game():
     Answer = random.randint(1,100)
     print("Welcome to The Guessing Number Game!")
