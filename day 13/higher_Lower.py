@@ -14,27 +14,30 @@ def moreFollowers(guess, account_a, account_b):
     else:
         return guess == 'b'
 
-random_a = random.choice(data)
-random_b = random.choice(data)
-
-if random_a == random_b:
-    random_b = random.choice(data)
-
-
-print(f"Compare A : {AccountData(random_a)}.")
-print(f"Account  B : {AccountData(random_b)}. ")
-
-#Ask User that who has more followers
-userChoice = input("Who has More followers : 'A' or 'B' : ").lower()
 
 points = 0
 
-is_correct = moreFollowers(userChoice,random_a,random_b)
+
+while True:
+    random_a = random.choice(data)
+    random_b = random.choice(data)
+    
+
+    if random_a == random_b:
+        random_b = random.choice(data)
+
+    print(f"Compare A : {AccountData(random_a)}.")
+    print(f"Account  B : {AccountData(random_b)}. ")
+
+    userChoice = input("Who has More followers : 'A' or 'B' : ").lower()
+
+    is_correct = moreFollowers(userChoice, random_a, random_b)
 
 
-if is_correct:
-    points += 1
-    print(f"You'r right your score is {points}")
+    if is_correct:
+        points += 1
+        print(f"You'r right your score is {points}")
 
-else:
-    print(f"Sorry you loose Your final point is {points}")
+    else:
+        print(f"Sorry you loose Your Total point is {points}")
+        break
