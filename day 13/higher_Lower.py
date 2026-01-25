@@ -1,15 +1,14 @@
 import random
 from Game_data import data
 
-def AccountData(account):
-    Account_Name = account['name']
-    Account_Description = account['description']
-    Account_country = account['country']
-    return f"{Account_Name}, {Account_Description}, {Account_country}"
+
+def account_data(account):
+    """This function is used for to get details about user data"""
+    return f"{account['name']}, {account['description']}, {account['country']}"
 
 
-def moreFollowers(guess, account_a, account_b):
-    if account_a['follower_count'] > account_b['follower_count']:
+def more_followers(guess, a, b):
+    if a['follower_count'] > b['follower_count']:
         return guess == 'a'
     else:
         return guess == 'b'
@@ -17,27 +16,25 @@ def moreFollowers(guess, account_a, account_b):
 
 points = 0
 
-
 while True:
-    random_a = random.choice(data)
-    random_b = random.choice(data)
-    
+    a = random.choice(data)
+    b = random.choice(data)
 
-    if random_a == random_b:
-        random_b = random.choice(data)
+    while a == b:
+        b = random.choice(data)
 
-    print(f"Compare A : {AccountData(random_a)}.")
-    print(f"Account  B : {AccountData(random_b)}. ")
+    print(f"Compare A: {account_data(a)}")
+    print(f"Compare B: {account_data(b)}")
 
-    userChoice = input("Who has More followers : 'A' or 'B' : ").lower()
+    guess = input("Who has more followers? A or B: ").lower()
 
-    is_correct = moreFollowers(userChoice, random_a, random_b)
+    if guess not in ['a', 'b']:
+        print("Invalid input!")
+        continue
 
-
-    if is_correct:
+    if more_followers(guess, a, b):
         points += 1
-        print(f"You'r right your score is {points}")
-
+        print(f"Correct! Your score is {points}")
     else:
-        print(f"Sorry you loose Your Total point is {points}")
+        print(f"Wrong! Final score: {points}")
         break
