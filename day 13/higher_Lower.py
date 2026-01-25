@@ -8,11 +8,11 @@ def AccountData(account):
     return f"{Account_Name}, {Account_Description}, {Account_country}"
 
 
-def moreFollowers(account_a, account_b):
+def moreFollowers(guess, account_a, account_b):
     if account_a['follower_count'] > account_b['follower_count']:
-        return 'a'
+        return guess == 'a'
     else:
-        return 'b'
+        return guess == 'b'
 
 random_a = random.choice(data)
 random_b = random.choice(data)
@@ -27,15 +27,14 @@ print(f"Account  B : {AccountData(random_b)}. ")
 #Ask User that who has more followers
 userChoice = input("Who has More followers : 'A' or 'B' : ").lower()
 
-#check user is correct of not :
 points = 0
 
-print(f"{moreFollowers(random_a, random_b)}")
-# print(f"{moreFollowers(random_a,random_b,userChoice)}")
-if userChoice == moreFollowers(random_a, random_b):
-    points += 1
-    print(f"Corret {points}")
-else:
-    points -= 1
-    print(f"Wrong {points}")
+is_correct = moreFollowers(userChoice,random_a,random_b)
 
+
+if is_correct:
+    points += 1
+    print(f"You'r right your score is {points}")
+
+else:
+    print(f"Sorry you loose Your final point is {points}")
