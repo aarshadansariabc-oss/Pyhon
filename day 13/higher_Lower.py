@@ -1,40 +1,34 @@
 import random
 from Game_data import data
 
-
-def account_data(account):
-    """This function is used for to get details about user data"""
-    return f"{account['name']}, {account['description']}, {account['country']}"
-
-
-def more_followers(guess, a, b):
-    if a['follower_count'] > b['follower_count']:
-        return guess == 'a'
+point = 0
+def more_followers(user, accounta, accountb):
+    if accounta['follower_count'] > accountb['follower_count']:
+        return user == 'a'
     else:
-        return guess == 'b'
-
-
-points = 0
+        return user == 'b'
+    
+def instInfo(account):
+    return f"{account['name']}, {account["description"]}"
 
 while True:
     a = random.choice(data)
     b = random.choice(data)
 
+
     while a == b:
         b = random.choice(data)
 
-    print(f"Compare A: {account_data(a)}")
-    print(f"Compare B: {account_data(b)}")
+    print(f"Choice a : {instInfo(a)} ")
+    print(f"Choice b : {instInfo(b)} ")
 
-    guess = input("Who has more followers? A or B: ").lower()
+    userChoice = input("Enter your choice A and B : ")
 
-    if guess not in ['a', 'b']:
-        print("Invalid input!")
-        continue
+    is_correct = more_followers(userChoice, a, b)
 
-    if more_followers(guess, a, b):
-        points += 1
-        print(f"Correct! Your score is {points}")
+    if is_correct:
+        point += 1
+        print(f"Correct choice : {point}")
     else:
-        print(f"Wrong! Final score: {points}")
+        print(f"Wrong choice! your total points is  {point}")
         break
